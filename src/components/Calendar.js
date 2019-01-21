@@ -1,33 +1,94 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-import CalendarUI from './CalendarUI.js'
-import CalendarView from './CalendarView'
-
-function MonthView(date = new Date()) {
-  let monthVal = date.getMonth()
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
-  this.prevMonth = months[monthVal]
-  this.nextMonth =  months[monthVal]
-  this.updateMonth = (bool = true) => {
-    if (bool) {
-      monthVal +=1
-      monthVal = (monthVal > 11) ? 0 : monthVal
-      this.nextMonth = months[monthVal]
-      this.prevMonth = months[(monthVal-1 < 0) ? 11 : monthVal-1]
-    } else {
-      monthVal -=1
-      monthVal = (monthVal < 0) ? 11 : monthVal
-      this.prevMonth = months[monthVal]
-      this.nextMonth = months[(monthVal+1 > 11) ? 0 : monthVal+1]
-    }
-  }
-}
+import CalendarUI, { RotatingMonths, ControlArrow } from './CalendarUI.js'
+import CalendarView, { DateGrid, WeekDayNames } from './CalendarView.js'
+import { fillCalendar } from '../calendar.tools.js';
 
 const Calendar = props => {
+  const [renderedDate, setRenderedDate] = useState(props.date)
+  const [degrees, setDegrees] = useState(0)
+  const [topMonthIndex, setTopMonthIndex] = useState(renderedDate.getMonth())
+  const [bottomMonthIndex, setBottomMonthIndex] = useState(renderedDate.getMonth())
+  const [toggleIndex, setToggleIndex] = useState(0b0)
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  const year = renderedDate.getFullYear()
+  const calendarData = fillCalendar(renderedDate.getMonth(), renderedDate.getFullYear())
+
+  const changeCalendar = event => {
+    const id = event.currentTarget.id
+    let year = renderedDate.getFullYear()
+    let month = renderedDate.getMonth()
+    if (id === "next") {
+      year = (month + 1 === 12) ? year + 1 : year
+      month = (year === renderedDate.getFullYear()) ? month + 1 : 0
+      if (month === props.date.getMonth() && year === props.date.getFullYear())
+        setRenderedDate(new Date())
+      else 
+        setRenderedDate(new Date(year, month))
+      setDegrees(degrees - 180)
+    }
+    if (id === "prev") {
+      year = (month - 1 === -1) ? year - 1 : year
+      month = (year === renderedDate.getFullYear()) ? month - 1 : 11
+      if (month === props.date.getMonth() && year === props.date.getFullYear())
+        setRenderedDate(new Date())
+      else 
+        setRenderedDate(new Date(year, month))
+      setDegrees(degrees + 180)
+    }
+  }
+  
+  useEffect(() => {
+    if (toggleIndex)
+      setBottomMonthIndex(renderedDate.getMonth())
+    else
+      setTopMonthIndex(renderedDate.getMonth())
+    setToggleIndex(~~!toggleIndex)
+  },[renderedDate])
+  
   return (
     <div className="calendar" style={{backgroundColor: props.colors.background, width: props.width+"px"}}>
-      <CalendarUI view={new MonthView()} colors={props.colors.calendarUI} />
-      <CalendarView colors={props.colors.calendarView} width={props.width} date={props.date} />
+      <CalendarUI colors={props.colors.calendarUI} monthsDisplay={
+        <RotatingMonths date={renderedDate} rotate={degrees}>
+          <text id="month-year-view" className="month-year" x="75" y="50" 
+          style={{fill: props.colors.textColor}}>{`${months[topMonthIndex]} ${year}`}</text>
+          <text 
+            id="month-year-view" 
+            className="month-year" 
+            x="75" 
+            y="140"
+            style={{fill: props.colors.textColor, transformOrigin: "50% 50%", transform: "translate(18px, 200px) rotate(180deg)"}}
+          >
+            {`${months[bottomMonthIndex]} ${year}`}
+          </text>
+        </RotatingMonths>
+      }>
+        <ControlArrow
+          y={40}
+          arrowColor={props.colors.calendarUI.textColor}
+          buttonColor={props.colors.calendarUI.arrowsBG}
+          id={"prev"}
+          onClick={changeCalendar}
+        />
+        <ControlArrow
+          x={150}
+          y={40}
+          arrowColor={props.colors.calendarUI.textColor}
+          buttonColor={props.colors.calendarUI.arrowsBG} 
+          flipArrow
+          id={"next"}
+          onClick={changeCalendar}
+        />
+      </CalendarUI>
+      <CalendarView width={props.width}>
+        <WeekDayNames colors={props.colors.calendarView} height={props.width} />
+        <DateGrid 
+          colors={props.colors.calendarView} 
+          width={props.width}
+          date={renderedDate}
+          calendarData={calendarData}
+        />
+      </CalendarView>
     </div>
   )
 }

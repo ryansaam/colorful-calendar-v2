@@ -33,16 +33,3 @@ export const fillCalendar = (month, year) => {
   }
   return datesArray
 }
-
-export const route = (number, boolean) => {
-  if (boolean) {
-    switch (number) {
-      case 1: return 4
-      case 2: return 3
-      case 3: return 2
-      case 4: return 1
-      default: return number + 1
-    }
-  }
-  return number + 1
-}

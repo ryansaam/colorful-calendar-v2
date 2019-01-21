@@ -1,24 +1,50 @@
 import React from 'react'
 
-import DateGrid from './DateGrid.js'
+import DateNode from './DateNode.js'
 
-const WeekDayNames = props => {
+export const WeekDayNames = props => {
   const names = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
   const nameElements = names.map(el =>
-    <div key={el}>{el}</div>
+    <div key={el} style={{color: props.colors.textColor}}>{el}</div>
   )
   return (
-    <div className="week-day-names" style={{backgroundColor: props.colors.weekDayNamesBG, height: props.width/7}} >
+    <div className="week-day-names" style={{backgroundColor: props.colors.weekDayNamesBG, height: props.height/7}} >
       {nameElements}
     </div>
+  )
+}
+
+export const DateGrid = props => {
+  const localDate = new Date()
+  let radius = props.width / 7
+  const renderedDate = props.date
+  let dateData = props.calendarData
+  const colors = props.colors
+  const dateNodes = dateData.map(el => {
+    if (el.type === "leadDate") return <DateNode textColor={colors.textColor} bgColor={colors.leadDate} key={el.id} radius={radius} number={el.date} />
+    if (
+      el.type === "monthDate" && 
+      el.date === renderedDate.getDate() && 
+      localDate.getMonth() === renderedDate.getMonth() &&
+      localDate.getFullYear() === renderedDate.getFullYear()
+    ) {
+      return <DateNode textColor={colors.textColor} bgColor={colors.currentDate} key={el.id} radius={radius} number={el.date} />
+    }
+    if (el.type === "monthDate") return <DateNode textColor={colors.textColor} bgColor={colors.monthDate} key={el.id} radius={radius} number={el.date} />
+    if (el.type === "postDate") return <DateNode textColor={colors.textColor} bgColor={colors.postDate} key={el.id} radius={radius} number={el.date} />
+    else { return null }
+  })
+  return (
+    <div className="date-grid" style={{width: props.width+"px"}}>
+      {dateNodes}
+    </div> 
   )
 }
 
 const CalendarView = props => {
   return (
     <div style={{width: props.width+"px"}}>
-      <WeekDayNames colors={props.colors} width={props.width} />
-      <DateGrid colors={props.colors} width={props.width} date={props.date} />
+      {props.children}
     </div>
   )
 }

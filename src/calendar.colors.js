@@ -1,28 +1,36 @@
 const colorTheme = {
   redflat: {
+    background: "#383737",
     textColor: "#fff",
-    componentBG: "#383737",
-    header1BG: "#383737",
-    header2BG: "#383737",
-    arrowsBG: "#ff2b2b",
-    weekDayNamesBG: "#c4c1c1",
-    prevMonthNodesBG: "#ff2b2b",
-    currentDateNodeBG: "#747272",
-    currentMonthNodesBG: "#c4c1c1",
-    nextMonthNodesBG: "#ff2b2b"
+    calendarUI: {
+      background: "#383737",
+      textColor: "#fff",
+      currentDateBG: "#383737",
+      monthYearViewBG: "#383737",
+      arrowsBG: "#ff2b2b",
+    },
+    calendarView: {
+      weekDayNamesBG: "#c4c1c1",
+      textColor: "#fff",
+      leadDate: "#ff2b2b",
+      currentDate: "#747272",
+      monthDate: "#c4c1c1",
+      postDate: "#ff2b2b"
+    }
   },
   original: {
     background: "#292828",
+    textColor: "hotpink",
     calendarUI: {
       background: "#292828",
-      textColor: "#000",
+      textColor: "hotpink",
       currentDateBG: "#fff",
       monthYearViewBG: "#fff",
       arrowsBG: "#fff",
     },
     calendarView: {
       weekDayNamesBG: "#fff",
-      textColor: "#000",
+      textColor: "hotpink",
       leadDate: "#8ee5ff",
       currentDate: "#c4c1c1",
       monthDate: "#fff",
@@ -30,16 +38,23 @@ const colorTheme = {
     }
   },
   purplenight: {
+    background: "#252525",
     textColor: "#fff",
-    componentBG: "#252525",
-    header1BG: "#383737",
-    header2BG: "#383737",
-    arrowsBG: "#cbcbff",
-    weekDayNamesBG: "#383737",
-    prevMonthNodesBG: "#cbcbff",
-    currentDateNodeBG: "#383737",
-    currentMonthNodesBG: "#8181aa",
-    nextMonthNodesBG: "#cbcbff"
+    calendarUI: {
+      background: "#252525",
+      textColor: "#fff",
+      currentDateBG: "#383737",
+      monthYearViewBG: "#383737",
+      arrowsBG: "#cbcbff",
+    },
+    calendarView: {
+      weekDayNamesBG: "#383737",
+      textColor: "#fff",
+      leadDate: "#cbcbff",
+      currentDate: "#383737",
+      monthDate: "#8181aa",
+      postDate: "#cbcbff"
+    }
   }
 }
 

@@ -12,7 +12,7 @@
 }
 
 .month-year-group {
-  transform-origin: 56% 129%;
+  transform-origin: 50% 128.5%;
   transition: transform ease-in 300ms;
 }
 .month-year {
@@ -52,4 +52,66 @@
   font-weight: 600;
   grid-row: 1/2;
   grid-column: 1/2;
+}
+
+.rotate-enter {
+  transform-origin: 56% 129%;
+  transform: rotate(-180deg) translate(-10px);
+  transition: transform ease-in 5000ms;
+}
+.rotate-enter-active {
+  transform-origin: 56% 129%;
+  transform: rotate(-360deg) translate(-10px);
+  transition: transform ease-in 5000ms;
+}
+.rotate-enter-done {
+  transform-origin: 56% 129%;
+  transform: rotate(0deg) translate(-10px);
+}
+
+.rotate-exit {
+  transform: rotate(0deg) translate(-10px);
+  transition: transform ease-in 5000ms;
+}
+.rotate-exit-active {
+  transform-origin: 56% 129%;
+  transform: rotate(-180deg) translate(-10px);
+}
+.rotate-exit-done {
+  transform-origin: 56% 129%;
+  transform: rotate(-180deg) translate(-10px);
+}
+
+
+.rotate-back-enter {
+  transform-origin: 56% 129%;
+  transform: rotate(180deg) translate(-10px);
+  transition: transform ease-in 5000ms;
+}
+.rotate-back-enter-active {
+  transform-origin: 56% 129%;
+  transform: rotate(360deg) translate(-10px);
+  transition: transform ease-in 5000ms;
+}
+.rotate-back-enter-done {
+  transform-origin: 56% 129%;
+  transform: rotate(0deg) translate(-10px);
+}
+
+.rotate-back-exit {
+  transform-origin: 56% 129%;
+  transform: rotate(0deg) translate(-10px);
+}
+.rotate-back-exit-active {
+  transform-origin: 56% 129%;
+  transform: rotate(180deg) translate(-10px);
+}
+.rotate-back-exit-done {
+  transform-origin: 56% 129%;
+  transform: rotate(180deg) translate(-10px);
+}
+
+.rotate-appear {
+  transform-origin: 56% 129%;
+  transform: rotate(0deg) translate(-10px);
 }
