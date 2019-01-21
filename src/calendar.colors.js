@@ -20,17 +20,17 @@ const colorTheme = {
   },
   original: {
     background: "#292828",
-    textColor: "hotpink",
+    textColor: "#000",
     calendarUI: {
       background: "#292828",
-      textColor: "hotpink",
+      textColor: "#000",
       currentDateBG: "#fff",
       monthYearViewBG: "#fff",
       arrowsBG: "#fff",
     },
     calendarView: {
       weekDayNamesBG: "#fff",
-      textColor: "hotpink",
+      textColor: "#000",
       leadDate: "#8ee5ff",
       currentDate: "#c4c1c1",
       monthDate: "#fff",
