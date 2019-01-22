@@ -8,8 +8,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Calendar 
-          width={200} 
+        <Calendar
+          width={200}
           date={new Date()}
           colors={colorTheme.original}
         />

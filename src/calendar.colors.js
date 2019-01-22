@@ -45,15 +45,15 @@ const colorTheme = {
       textColor: "#fff",
       currentDateBG: "#383737",
       monthYearViewBG: "#383737",
-      arrowsBG: "#cbcbff",
+      arrowsBG: "#cbcbf9",
     },
     calendarView: {
       weekDayNamesBG: "#383737",
       textColor: "#fff",
-      leadDate: "#cbcbff",
+      leadDate: "#cbcbf9",
       currentDate: "#383737",
       monthDate: "#8181aa",
-      postDate: "#cbcbff"
+      postDate: "#cbcbf9"
     }
   }
 }

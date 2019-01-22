@@ -10,6 +10,7 @@ const Calendar = props => {
   const [topMonthIndex, setTopMonthIndex] = useState(renderedDate.getMonth())
   const [bottomMonthIndex, setBottomMonthIndex] = useState(renderedDate.getMonth())
   const [toggleIndex, setToggleIndex] = useState(0b0)
+  const [width,setWidth] = useState(props.width)
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   const year = renderedDate.getFullYear()
   const calendarData = fillCalendar(renderedDate.getMonth(), renderedDate.getFullYear())
@@ -45,9 +46,15 @@ const Calendar = props => {
       setTopMonthIndex(renderedDate.getMonth())
     setToggleIndex(~~!toggleIndex)
   },[renderedDate])
-  
+
+  useEffect(() => {
+    if (!props.width) {
+      setWidth(document.getElementById("calendar-root").offsetWidth)
+    }
+  },[])
+
   return (
-    <div className="calendar" style={{backgroundColor: props.colors.background, width: props.width+"px"}}>
+    <div id="calendar-root" className="calendar" style={{backgroundColor: props.colors.background, width: width+"px"}}>
       <CalendarUI colors={props.colors.calendarUI} monthsDisplay={
         <RotatingMonths date={renderedDate} rotate={degrees}>
           <text id="month-year-view" className="month-year" x="75" y="50" 
@@ -80,11 +87,11 @@ const Calendar = props => {
           onClick={changeCalendar}
         />
       </CalendarUI>
-      <CalendarView width={props.width}>
-        <WeekDayNames colors={props.colors.calendarView} height={props.width} />
+      <CalendarView width={width}>
+        <WeekDayNames colors={props.colors.calendarView} height={width} />
         <DateGrid 
           colors={props.colors.calendarView} 
-          width={props.width}
+          width={width}
           date={renderedDate}
           calendarData={calendarData}
         />

@@ -5,7 +5,11 @@ import DateNode from './DateNode.js'
 export const WeekDayNames = props => {
   const names = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
   const nameElements = names.map(el =>
-    <div key={el} style={{color: props.colors.textColor}}>{el}</div>
+    <div key={el} style={{padding: "5px"}}>
+      <svg viewBox="0 0 20 11" style={{width: "100%"}}>
+        <text x="50%" y="6.7" dominantBaseline="middle" textAnchor="middle" style={{fill: props.colors.textColor, fontSize: "14px"}}>{el}</text>
+      </svg>
+    </div>
   )
   return (
     <div className="week-day-names" style={{backgroundColor: props.colors.weekDayNamesBG, height: props.height/7}} >
