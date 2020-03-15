@@ -5,7 +5,7 @@
 A simple calendar component for react applications
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 import { Calendar, colorTheme } from './calendar'
 
 const App = () => {
